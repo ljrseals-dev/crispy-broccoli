@@ -1,0 +1,17 @@
+# Install (user unit):
+#   mkdir -p ~/.config/systemd/user
+#   cp systemd/ai-voice.service ~/.config/systemd/user/
+#   systemctl --user enable --now ai-voice.service
+[Unit]
+Description=ai-voice offline voice daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/ai-voice/voice_daemon.py
+Restart=on-failure
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

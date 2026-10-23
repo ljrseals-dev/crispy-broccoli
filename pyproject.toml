@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aoc-v5"
+version = "5.0.0"
+description = "AOC v5 — offline voice, synthesis, HUSH bus"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "AOC" }]
+dependencies = [
+    "numpy",
+    "soundfile",
+    "requests",
+    "rich",
+]
+
+[project.optional-dependencies]
+tts-kokoro = ["kokoro-onnx>=0.3.0", "onnxruntime>=1.17.0"]
+tts-xtts = ["TTS>=0.22.0", "torch>=2.0.0", "torchaudio>=2.0.0"]
+tts-piper = ["piper-tts>=1.2.0", "onnxruntime>=1.17.0"]
+tts-f5 = ["f5-tts>=1.1.0", "torch>=2.0.0", "torchaudio>=2.0.0"]
+vc = ["torch>=2.0.0", "torchaudio>=2.0.0", "gdown"]
+dsp = ["scipy>=1.10.0", "librosa"]
+test = ["pytest>=7", "scipy>=1.10.0"]
+all = [
+    "kokoro-onnx>=0.3.0",
+    "onnxruntime>=1.17.0",
+    "TTS>=0.22.0",
+    "torch>=2.0.0",
+    "torchaudio>=2.0.0",
+    "piper-tts>=1.2.0",
+    "f5-tts>=1.1.0",
+    "gdown",
+    "scipy>=1.10.0",
+    "librosa",
+    "pytest>=7",
+    "openai-whisper",
+    "pyttsx3",
+]
+
+[project.scripts]
+aoc-magic = "aoc_magic_v5.cli:main"
+aoc-magic-engines = "aoc_magic_v5.cli:engines_main"
+aoc-voice = "hush_voice.loop:main"
+aoc-daemon = "hush_voice.daemon:main"
+aoc-daw = "hush_voice.daw_bus:cli_main"
+
+[tool.setuptools.packages.find]
+include = ["aoc_magic_v5*", "hush_voice*"]
+
+[tool.setuptools.package-data]
+aoc_magic_v5 = ["py.typed"]
+hush_voice = ["py.typed"]

@@ -1,0 +1,33 @@
+{
+  "whisper_model": "base",
+  "whisper_language": "en",
+  "sample_rate": 16000,
+  "record_seconds": 5,
+  "silence_threshold": 0.01,
+  "silence_duration": 1.5,
+  "use_termux_mic": true,
+  "llm": {
+    "backend": "llamacpp",
+    "url": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "local",
+    "system_prompt": "You are the voice front-end for HUSH. For every user utterance you MUST emit exactly one JSON object on its own line, of the form {\"op\":\"<op>\",\"target\":<target>,\"args\":{...}}, followed by exactly one short spoken confirmation sentence. Valid ops are: midi.insert_notes, track.set_volume, track.mute, forensic.set_params, transport.set_tempo, transport.play, transport.stop, session.query. Never emit anything else. Never wrap the JSON in markdown fences.",
+    "max_tokens": 300,
+    "temperature": 0.2
+  },
+  "tts": {
+    "voice": "en_US-lessac-medium",
+    "speed": 1.0,
+    "sample_rate": 22050,
+    "prefer_termux_tts": false
+  },
+  "magic": {
+    "enabled": false,
+    "tts_engine": "auto",
+    "vc_engine": "none",
+    "device": "cpu",
+    "sample_rate": 44100,
+    "limiter_ceiling_db": -1.0
+  },
+  "hotkey": "enter",
+  "continuous": true
+}
